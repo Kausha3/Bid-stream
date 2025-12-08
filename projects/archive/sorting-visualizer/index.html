@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <h1>Sorting Visualizer</h1>
+        <div class="controls">
+            <button id="new-array-btn">New Array</button>
+            <button id="bubble-sort-btn">Bubble Sort</button>
+            <button id="merge-sort-btn">Merge Sort</button>
+            <button id="quick-sort-btn">Quick Sort</button>
+            <div class="speed-control">
+                <label for="speed">Speed:</label>
+                <input type="range" id="speed" min="1" max="100" value="50">
+            </div>
+            <div class="size-control">
+                <label for="size">Array Size:</label>
+                <input type="range" id="size" min="5" max="50" value="20">
+            </div>
+        </div>
+        <div id="container" class="bar-container"></div>
+        <div class="legend">
+            <span class="legend-item"><span class="color-box default"></span>Unsorted</span>
+            <span class="legend-item"><span class="color-box comparing"></span>Comparing</span>
+            <span class="legend-item"><span class="color-box pivot"></span>Pivot</span>
+            <span class="legend-item"><span class="color-box sorted"></span>Sorted</span>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
