@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAUSHA TRIVEDI // Full-Stack Developer</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+    <div class="cursor-target" id="cursor-target"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <div id="ui-layer">
+        <header>
+            <div class="brand">KAUSHA<span>_TRIVEDI</span></div>
+
+            <!-- TERMINAL OVERLAY (for expanded mode) -->
+            <div class="terminal-overlay" id="terminal-overlay"></div>
+
+            <!-- TERMINAL WINDOW -->
+            <div class="terminal" id="terminal">
+                <div class="terminal-header">
+                    <span>kausha@dev:~$</span>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span>BASH</span>
+                        <button class="terminal-expand-btn" id="terminal-expand-btn" title="Expand/Collapse (Esc)">⤢</button>
+                    </div>
+                </div>
+                <div class="terminal-body" id="term-output">
+                    <div class="terminal-line">System initialized.</div>
+                    <div class="terminal-line">Type 'help' for commands.</div>
+                </div>
+                <div class="terminal-input-line">
+                    <span class="prompt">$</span>
+                    <input type="text" id="term-input" autocomplete="off">
+                </div>
+            </div>
+        </header>
+
+        <div class="data-panel">
+            <div class="panel-content active" id="panel-0">
+                <span class="panel-label">SYSTEM_ROOT</span>
+                <p class="panel-text">
+                    Full-stack thinker. Systems builder.<br>
+                    Turning 'it can't scale' into 'deployed to production.'
+                </p>
+            </div>
+            <div class="panel-content" id="panel-1">
+                <span class="panel-label">ACTIVE_PROJECTS // CLICK TO EXPLORE</span>
+                <div class="project-filters" id="project-filters">
+                    <button class="filter-tab active" data-filter="all" onclick="filterProjects('all')">ALL</button>
+                    <button class="filter-tab" data-filter="frontend" onclick="filterProjects('frontend')">FRONTEND</button>
+                    <button class="filter-tab" data-filter="backend" onclick="filterProjects('backend')">BACKEND</button>
+                    <button class="filter-tab" data-filter="fullstack" onclick="filterProjects('fullstack')">FULL-STACK</button>
+                </div>
+                <div class="projects-container" id="projects-container">
+                    <!-- Projects are rendered dynamically by JavaScript -->
+                </div>
+            </div>
+            <div class="panel-content" id="panel-2">
+                <span class="panel-label">TECH_STACK [NEURAL_VIEW]</span>
+                <p class="panel-text">
+                    React // Next.js // Node.js // TypeScript // Python<br>
+                    AWS // Docker // Kubernetes // TensorFlow // PostgreSQL
+                </p>
+            </div>
+            <div class="panel-content" id="panel-3">
+                <span class="panel-label">SECURE_LINK</span>
+                <p class="panel-text">
+                    Open for encrypted transmission.<br><br>
+                    <span style="color: #00ffcc; border: 1px solid #00ffcc; padding: 10px;">email: kaushatrivedi12@gmail.com</span>
+                </p>
+                <div class="contact-links">
+                    <a href="assets/Kausha_Trivedi_Resume.pdf" target="_blank" class="contact-link">
+                        <span class="link-icon">◈</span> RESUME
+                    </a>
+                    <a href="https://www.linkedin.com/in/kaushat/" target="_blank" class="contact-link">
+                        <span class="link-icon">◈</span> LINKEDIN
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-rail">
+            <button class="nav-btn active" onclick="switchView(0)">ROOT</button>
+            <button class="nav-btn" onclick="switchView(1)">PROJECTS</button>
+            <button class="nav-btn" onclick="switchView(2)">STACK</button>
+            <button class="nav-btn" onclick="switchView(3)">CONTACT</button>
+        </div>
+    </div>
+
+    <!-- PROJECT DETAIL MODAL -->
+    <div class="project-modal" id="project-modal">
+        <div class="modal-backdrop" onclick="closeProject()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-back" onclick="closeProject()">
+                    ← BACK
+                </button>
+                <button class="modal-close" onclick="closeProject()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image" id="modal-image">
+                    <span class="modal-image-placeholder">◈</span>
+                </div>
+                <h2 class="modal-title" id="modal-title">PROJECT_NAME</h2>
+                <div class="modal-subtitle" id="modal-subtitle">// CATEGORY</div>
+                <p class="modal-description" id="modal-description">
+                    Project description goes here...
+                </p>
+
+                <div class="modal-section-title">TECH_STACK</div>
+                <div class="modal-tech-stack" id="modal-tech-stack">
+                    <!-- Tech tags injected by JS -->
+                </div>
+
+                <div class="modal-section-title">KEY_FEATURES</div>
+                <div class="modal-features" id="modal-features">
+                    <!-- Features injected by JS -->
+                </div>
+
+                <div class="modal-links" id="modal-links">
+                    <!-- Links injected by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ARCHIVES MODAL (triggered by terminal command) -->
+    <div class="archives-modal" id="archives-modal">
+        <div class="modal-backdrop" onclick="closeArchives()"></div>
+        <div class="archives-content">
+            <div class="archives-header">
+                <div class="archives-title-row">
+                    <span class="archives-icon">▣</span>
+                    <h2 class="archives-title">ARCHIVES</h2>
+                </div>
+                <div class="archives-subtitle">// LEGACY_PROJECTS // FOUNDATIONS</div>
+                <button class="archives-close" onclick="closeArchives()">×</button>
+            </div>
+            <div class="archives-body" id="archives-body">
+                <!-- Archive items injected by JS -->
+            </div>
+            <div class="archives-footer">
+                <span class="archives-hint">Type 'exit' or click outside to close</span>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <!-- CDN Dependencies (placed at end of body for faster initial render) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+
+    <!-- External Data & Application Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
